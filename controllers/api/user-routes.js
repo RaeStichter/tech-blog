@@ -1,8 +1,10 @@
 const router = require('express').Router();
-const { User, Post, Comment } = require('../../models');
+const { User, Post, Comment  } = require('../../models');
+const withAuth = require('../../utils/auth');
 
-// get all users
+// GET /api/users
 router.get('/', (req, res) => {
+  // Access our User model and run .findAll() method)
   User.findAll({
     attributes: { exclude: ['password'] }
   })
@@ -13,6 +15,7 @@ router.get('/', (req, res) => {
     });
 });
 
+// GET /api/users/1
 router.get('/:id', (req, res) => {
   User.findOne({
     attributes: { exclude: ['password'] },
@@ -22,8 +25,9 @@ router.get('/:id', (req, res) => {
     include: [
       {
         model: Post,
-        attributes: ['id', 'title', 'post_content', 'created_at']
+        attributes: ['id', 'title','post_body', 'created_at']
       },
+      // include the Comment model here:
       {
         model: Comment,
         attributes: ['id', 'comment_text', 'created_at'],
@@ -31,6 +35,10 @@ router.get('/:id', (req, res) => {
           model: Post,
           attributes: ['title']
         }
+      },
+      {
+        model: Post,
+        attributes: ['title']
       }
     ]
   })
@@ -47,6 +55,7 @@ router.get('/:id', (req, res) => {
     });
 });
 
+// POST /api/users
 router.post('/', (req, res) => {
   // expects {username: 'Lernantino', email: 'lernantino@gmail.com', password: 'password1234'}
   User.create({
@@ -63,10 +72,6 @@ router.post('/', (req, res) => {
       res.json(dbUserData);
     });
   })
-    .catch(err => {
-      console.log(err);
-      res.status(500).json(err);
-    });
 });
 
 router.post('/login', (req, res) => {
@@ -98,10 +103,11 @@ router.post('/login', (req, res) => {
   });
 });
 
-router.put('/:id', (req, res) => {
+// PUT /api/users/1
+router.put('/:id', withAuth,  (req, res) => {
   // expects {username: 'Lernantino', email: 'lernantino@gmail.com', password: 'password1234'}
 
-  // pass in req.body instead to only update what's passed through
+  // if req.body has exact key/value pairs to match the model, you can just use `req.body` instead
   User.update(req.body, {
     individualHooks: true,
     where: {
@@ -121,7 +127,8 @@ router.put('/:id', (req, res) => {
     });
 });
 
-router.delete('/:id', (req, res) => {
+// DELETE /api/users/1
+router.delete('/:id', withAuth,  (req, res) => {
   User.destroy({
     where: {
       id: req.params.id
@@ -140,15 +147,15 @@ router.delete('/:id', (req, res) => {
     });
 });
 
-// router.post('/logout', (req, res) => {
-//   if (req.session.loggedIn) {
-//     req.session.destroy(() => {
-//       res.status(204).end();
-//     });
-//   }
-//   else {
-//     res.status(404).end();
-//   }
-// });
+router.post('/logout', (req, res) => {
+  if (req.session.loggedIn) {
+    req.session.destroy(() => {
+      res.status(204).end();
+    });
+  }
+  else {
+    res.status(404).end();
+  }
+});
 
 module.exports = router;

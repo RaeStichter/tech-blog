@@ -1,0 +1,57 @@
+<article>
+  <a class="text-dark" href="/dashboard"> &larr; Back to dashboard</a>
+  <h3 class= "text-dark">
+    Edit Post
+  </h3>
+  <form class="edit-post-form">
+   <div class="mb-3">
+      <input class= "form-control" name="post-title" type="text" value="{{post.title}}" />
+    </div>
+    <div class="mb-3">
+      <input class= "form-control" name="post-body" type="text" value="{{post.post_body}}" />
+    </div>
+  <div class="mb-3">
+      |
+      <a href="/post/{{post.id}}">{{post.comments.length}} {{format_plural "comment" post.comments.length}}</a>
+    </div>
+    <button type="submit" class="bg-info text-light">Save Post</button>
+    <button type="button" class="delete-post-btn bg-danger text-light">Delete Post</button>
+  </form>
+</article>
+<br>
+<div class="mb-3">
+<form class="comment-form">
+
+    <textarea name="comment-body"></textarea>
+  </div>
+
+  <div class="mb-3">
+    <button type="submit" class="bg-dark text-light">Add Comment</button>
+  </div>
+</form>
+
+
+ {{#if post.Comments}}
+    <section class="card comments">
+        <div class="card-header">
+            <h3>Comments</h3>
+        </div>
+
+        <div class="card-body">
+            {{#each post.Comments}}
+            <div class='card-comments'>
+                <p>
+                    {{body}}
+                </p>
+                <p>
+                    &mdash; {{user.username}}, {{format_date created_at}}
+                </p>
+            </div>
+            {{/each}}
+        </div>
+    </section>
+    {{/if}}
+
+<script src="/javascript/edit-post.js"></script>
+<script src="/javascript/delete-post.js"></script>
+<script src="/javascript/comment.js"></script>

@@ -1,0 +1,13 @@
+<article class="post">
+  <div class="card-header bg-dark">
+    <a href="/post/{{id}}" class= "text-light" target="_blank">{{title}}</a>
+  </div>
+<div class="meta card-text card-body text-strong mb-3">
+  {{post_body}}
+</div>
+  <div class="meta card-text card-body text-strong mb-3">
+    by {{user.username}} created on {{created_at}}
+    |
+    <a href="/post/{{id}}" class= "text-dark">{{comments.length}} {{format_plural "comment" comments.length}}</a>
+  </div>
+</article>
