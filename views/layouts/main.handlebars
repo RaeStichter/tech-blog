@@ -5,35 +5,38 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>The Tech Blog</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" href="/stylesheets/style.css">
 </head>
 
 <body>
   <div class="wrapper">
     <header>
-      <h1>
-        The Tech Blog
-      </h1>
-      <nav class="topnav">
+      {{!-- <div class="jumbotron"> --}}
+        <h1 class="display-4">The Tech Blog</h1>
+        <hr class="my-4">
+        <nav class="topnav">
 
-        {{#if loggedIn}}
+          {{#if loggedIn}}
 
-        <a href="/">Home</a>
+          <a href="/">Home</a>
 
-        <a href="/dashboard">Dashboard</a>
+          <a href="/dashboard">Dashboard</a>
 
-        <button id="logout" class="btn-no-style">Logout</button>
+          <a href="/" id="logout">Logout</a>
 
-        {{else}}
+          {{else}}
 
-        <a href="/">Home</a>
+          <a href="/">Home</a>
 
-        <a href="/dashboard">Dashboard</a>
+          <a href="/dashboard">Dashboard</a>
 
-        <a href="/login">login</a>
+          <a href="/login">login</a>
 
-        {{/if}}
-      </nav>
+          {{/if}}
+        </nav>
+      {{!-- </div> --}}
     </header>
     <main>
       {{{ body }}}
