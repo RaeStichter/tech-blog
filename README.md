@@ -15,19 +15,19 @@ _____________________________
 
 ### Installation
 _____________________________
-*Steps required to intall and run this program:*
+There are no special installation instructions, simply click the link below:
 
-Once the code is cloned from the repository, you must run `npm install` in your terminal in the root directory.
+[The Tech Blog](https://afternoon-spire-65125.herokuapp.com/)
 
-The program itself can be called and used by typing the command `npm start`.
-https://afternoon-spire-65125.herokuapp.com/ 
 
 ### Usage
 _____________________________
 *Instructions and example for use:*
 
-Please view the videos below for a full walk through of the functionality!
-[User Walk Through](https://drive.google.com/file/d/10H7g3lVSquacQrixAfh3-5gzGRFpcn4z/view)
+If you visit our site and are not logged in, you will still be able to view current blog topics.  This is the view you will see:
+![View of all posts](./public/screenshot.png)
+
+If you log in, you will be able to create a new blog topic and comment on other user's blogs.
 
 ### Questions
 _____________________________
