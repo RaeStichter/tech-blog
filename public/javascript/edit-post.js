@@ -1,5 +1,6 @@
 async function editFormHandler(event) {
-    event.preventDefault();
+   
+  event.preventDefault();
   
     const title = document.querySelector('input[name="post-title"]').value.trim();
     const post_body = document.querySelector('input[name="post-body"]').value;
@@ -22,7 +23,8 @@ async function editFormHandler(event) {
       document.location.replace('/dashboard/');
     } else {
       alert(response.statusText);
-    }
   }
+}
   
-  document.querySelector('.edit-post-form').addEventListener('submit', editFormHandler);
+// EVENT LISTENER
+document.querySelector('.edit-post-form').addEventListener('submit', editFormHandler);

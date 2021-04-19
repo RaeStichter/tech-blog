@@ -1,8 +1,10 @@
 async function commentFormHandler(event) {
     event.preventDefault();
-  
+
+    // pulling the information from the textbox
     const comment_text = document.querySelector('textarea[name="comment-body"]').value.trim();
   
+      // getting the id based on what the window location indicates
     const post_id = window.location.toString().split('/')[
       window.location.toString().split('/').length - 1
     ];
@@ -23,8 +25,10 @@ async function commentFormHandler(event) {
         document.location.reload();
       } else {
         alert(response.statusText);
+        console.log("There was an issue adding your comment.");
       }
     }
-  }
-  
-  document.querySelector('.comment-form').addEventListener('submit', commentFormHandler);
+}
+
+// EVENT LISTENERS
+document.querySelector('.comment-form').addEventListener('submit', commentFormHandler);
